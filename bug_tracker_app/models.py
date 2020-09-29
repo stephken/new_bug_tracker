@@ -1,5 +1,5 @@
 from django.db import models
-from djangp.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
 # Create your models here.
@@ -26,3 +26,5 @@ class Ticket(models.Model):
     
     def __str__(self):
         return self.title
+
+    

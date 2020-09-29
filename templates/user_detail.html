@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block content %}
+<nav>
+    <a href="/"><button>Home</button></a> |
+    <a href="/add_ticket/"><button>Add Ticket</button></a> |
+    <a href="/logout/"><button>Logout</button></a>
+</nav>
+    <p>
+    <br />
+    </p>
+    {% if not user %}
+    <h1>The User you are looking for doesn't seem to exist</h1>
+    {% else %}
+    <h1>{{ user.username }}</h1>
+    <p>
+        <br />
+    </p>
+
+    <h2>This user has contributed to or been assigned these:</h2>
+    <h3>New Tickets</h3>
+    {% for ticket in tickets_by %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'N' %}
+                <li><a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a></li>
+            {% endif %}
+        </ul>
+    {% endfor %}
+
+    <h3>Tickets In Progress</h3>
+    {% for ticket in tickets_assigned %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'IP' %}
+                <a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a>
+            {% endif %}
+        </ul>
+    {% endfor %}
+
+    <h3>Completed Tickets</h3>
+    {% for ticket in tickets_completed %}
+        <ul>
+                <a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a>
+        </ul>
+    {% endfor %}
+
+    <h3>Invalid Tickets</h3>
+    {% for ticket in tickets_by %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'IV' %}
+                <a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a>
+            {% endif %}
+        </ul>
+    {% endfor %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>{{ welcome }}</h1>
+    <h1>{{ title }}</h1>
+
+    <nav>
+        <a href="/add_ticket/"><button>Add Ticket</button></a> |
+        <a href="/logout/"><button>Logout</button></a>
+    </nav>
+    <h1>New</h1>
+    {% for ticket in tickets %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'N' %}
+                <ul>
+                    <li><a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a></li>
+                    </ul>
+            {% endif %}
+        </ul>
+    {% endfor %}
+
+    <h1>In Progress</h1>
+    {% for ticket in tickets %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'IP' %}
+                <ul>
+                    <li><a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a></li>
+                </ul>
+            {% endif %}
+        </ul>
+    {% endfor %}
+
+    <h1>Completed</h1>
+    {% for ticket in tickets %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'D' %}
+                <ul>
+                    <li><a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a></li>
+                </ul>
+            {% endif %}
+        </ul>
+    {% endfor %}
+
+    <h1>Invalid</h1>
+    {% for ticket in tickets %}
+        <ul>
+            {% if ticket.ticket_status_choices == 'IV' %}
+                <ul>
+                    <li><a href="/ticket/{{ ticket.id }}/">{{ ticket.title }}</a></li>
+                </ul>
+            {% endif %}
+        </ul>
+    {% endfor %}
+{% endblock %}
